@@ -1,0 +1,34 @@
+{
+  "name": "comprehensive_analysis",
+  "description": "Perform comprehensive security analysis combining contract analysis with knowledge base queries",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "Path to the .sol file to analyze"
+      },
+      "includeKnowledgeBase": {
+        "type": "boolean",
+        "default": true,
+        "description": "Include knowledge base queries"
+      },
+      "knowledgeLimit": {
+        "type": "number",
+        "default": 5,
+        "description": "Number of knowledge base results per collection"
+      },
+      "includeSimilarExploits": {
+        "type": "boolean",
+        "default": true,
+        "description": "Find similar historical exploits"
+      }
+    },
+    "required": [
+      "path"
+    ],
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  }
+}
+

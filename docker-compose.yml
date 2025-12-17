@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: mpc-bb-chromadb
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Listen on all interfaces inside the container
+      CHROMA_SERVER_HOST: 0.0.0.0
+      CHROMA_SERVER_HTTP_PORT: 8000
+      # Enable persistence so your embeddings are not lost
+      IS_PERSISTENT: "TRUE"
+      PERSIST_DIRECTORY: /chroma/data
+      # Not strictly needed for this Node backend (server-to-server),
+      # but safe to allow all origins if you later call it from a browser.
+      CHROMA_SERVER_CORS_ALLOW_ORIGINS: '["*"]'
+    volumes:
+      # Persist Chroma data on the host, aligned with config.paths.chroma
+      - ./data/chroma:/chroma/data
+
+
+
+
+
+
+
+

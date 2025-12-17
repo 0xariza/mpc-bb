@@ -4,22 +4,35 @@
  * 
  * Minimal entry point:
  * 1. Initialize environment
- * 2. Create server
- * 3. Connect to STDIO transport
+ * 2. Initialize databases
+ * 3. Create server
+ * 4. Connect to STDIO transport
  */
 
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { config, logger, validateConfig } from "./core/index.js";
 import { ensureDirectory } from "./utils/index.js";
 import { createServer } from "./server.js";
+import { initializeDatabases } from "./database/index.js";
 
 /**
  * Initialize the environment
  */
-function initialize(): void {
+async function initialize(): Promise<void> {
   validateConfig();
+  
+  // Ensure directories exist
   ensureDirectory(config.paths.data);
   ensureDirectory(config.paths.logs);
+  ensureDirectory(config.paths.chroma);
+  ensureDirectory(config.paths.sqlite);
+  
+  // Initialize databases
+  if (config.features.enableVectorDb || config.features.enableSqlite) {
+    logger.info("Initializing databases...");
+    await initializeDatabases();
+    logger.info("Databases initialized");
+  }
   
   logger.info("Environment initialized", { 
     node: process.version, 
@@ -32,7 +45,7 @@ function initialize(): void {
  */
 async function main(): Promise<void> {
   try {
-    initialize();
+    await initialize();
     
     const server = createServer();
     const transport = new StdioServerTransport();

@@ -1,0 +1,16 @@
+{
+  "name": "analyze_defihacklabs",
+  "description": "Analyze DeFiHackLabs repository and provide statistics about exploits",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "scan": {
+        "type": "boolean",
+        "default": false,
+        "description": "Scan the repository (may take time for large repos)"
+      }
+    },
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  }
+}

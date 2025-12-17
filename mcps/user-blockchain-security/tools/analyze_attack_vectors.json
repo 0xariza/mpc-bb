@@ -1,0 +1,21 @@
+{
+  "name": "analyze_attack_vectors",
+  "description": "Analyze Solidity-Attack-Vectors index and summarize known attack vectors",
+  "arguments": {
+    "type": "object",
+    "properties": {
+      "includeList": {
+        "type": "boolean",
+        "default": false,
+        "description": "Include full list of attack vectors in the response"
+      },
+      "deepAnalysis": {
+        "type": "boolean",
+        "default": false,
+        "description": "Parse detailed information from individual attack vector files"
+      }
+    },
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-07/schema#"
+  }
+}

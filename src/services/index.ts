@@ -1,2 +1,6 @@
-// Services - Step 2+
-export {};
+/**
+ * Services Module
+ * ===============
+ */
+
+export * from "./knowledge.service.js";
